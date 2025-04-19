@@ -4,15 +4,18 @@ import pygame
 
 
 class Menu:
-    def __init__(self):
+    def __init__(self, screen):
         self.running = True
         self.y = SCREEN_HEIGHT / 2
         self.x = SCREEN_WIDTH / 2
         self.img = create_sprite(SPRITE_PATH, "message.png")
+        self.game_over_sprite = create_sprite(SPRITE_PATH, "gameover.png")
         self.state = True
+        self.screen = screen
 
-    def draw(self, screen):
-        self.start_menu(screen)
+    # def draw(self):
+    #     self.start()
+    #     # return self
 
     @staticmethod
     def space_signal():
@@ -29,9 +32,13 @@ class Menu:
             return False
         return True
 
-    def start_menu(self, screen):
+    def start(self):
         if self.running:
-            screen.blit(self.img, (self.x / 2.5, self.y / 2))
+            self.screen.blit(self.img, (self.x / 2.5, self.y / 2))
             pygame.time.Clock().tick(FPS) / 2000
-            self.running = self.space_signal()
-            return self.esq_signal()
+
+    def game_over(self):
+        if self.running:
+            sprite_rect = self.game_over_sprite.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
+            self.screen.blit(self.game_over_sprite, sprite_rect)
+
