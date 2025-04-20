@@ -1,4 +1,3 @@
-from pygame.examples.moveit import GameObject
 from pygame import mixer
 from src.menu import *
 from src.player import *
